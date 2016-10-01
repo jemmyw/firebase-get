@@ -180,6 +180,5 @@ function get(stuff) {
     const promise = Bluebird.props(createPromises(specs));
     return Promise.resolve(promise);
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = get;
+exports.get = get;
 //# sourceMappingURL=index.js.map

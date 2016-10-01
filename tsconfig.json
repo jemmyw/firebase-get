@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "declaration": false,
     "lib": [
       "es2015"
     ],
@@ -19,7 +18,9 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "ES6",
-    "outDir": "dist/"
+    "outDir": "dist/",
+    "declaration": true,
+    "declarationDir": "dist/"
   },
   "formatCodeOptions": {
     "indentSize": 2,

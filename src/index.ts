@@ -216,7 +216,7 @@ const noDependencies = compose<InternalSpecs, InternalSpec[], InternalSpec[]>(
  * @param stuff
  * @returns {Promise<FulfilledSpec>}
  */
-export default function get(stuff:Spec):Promise<FulfilledSpec> {
+export function get(stuff:Spec):Promise<FulfilledSpec> {
   const specs:InternalSpecs = constructInternalSpecs(stuff);
 
   noDependencies(specs).forEach(spec => {

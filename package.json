@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "typings": "src/types.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "npm run build && node dist/index.js"
