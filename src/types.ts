@@ -14,5 +14,5 @@ export interface FirebaseRecord {
 }
 
 export interface FulfilledSpec {
-  [propName: string]: null | FirebaseRecord | FirebaseRecord[]
+  [propName: string]: any | any[];
 }
