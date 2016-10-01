@@ -8,10 +8,8 @@ import {
 } from 'ramda';
 import {test} from './test';
 import {Test} from 'tape-async';
-import FirebaseRecord = FirebaseGet.FirebaseRecord;
-import Spec = FirebaseGet.Spec;
-import FulfilledSpec = FirebaseGet.FulfilledSpec;
 import Reference = firebase.database.Reference;
+import {FirebaseRecord, Spec, FulfilledSpec} from "./types";
 
 type PairObject<T> = {[name:string]:T}
 type Pair<T> = [string, T]

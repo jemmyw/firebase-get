@@ -1,5 +1,4 @@
-import Spec = FirebaseGet.Spec;
-import FulfilledSpec = FirebaseGet.FulfilledSpec;
+import { Spec, FulfilledSpec } from "./types";
 /**
  * Take a spec and return a bunch of things from firebase. The spec is an
  * object where the key is the name of a root ref, i.e. project, and the value
