@@ -2,7 +2,7 @@
 const tape = require('tape-async');
 function test(filename, name, fn) {
     const mainModule = process.mainModule;
-    if (mainModule.filename === filename) {
+    if (mainModule && mainModule.filename === filename) {
         tape(name, fn);
     }
 }
