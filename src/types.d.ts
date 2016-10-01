@@ -18,3 +18,10 @@ declare namespace FirebaseGet {
     [propName: string]: null | FirebaseRecord | FirebaseRecord[]
   }
 }
+
+declare module "firebase-get" {
+  import Spec = FirebaseGet.Spec;
+  import FulfilledSpec = FirebaseGet.FulfilledSpec;
+  let get:(spec:Spec) => Promise<FulfilledSpec>;
+  export = get;
+}
