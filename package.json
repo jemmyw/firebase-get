@@ -1,0 +1,23 @@
+{
+  "name": "firebase-get",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node dist/index.js"
+  },
+  "author": "Jeremy Wells <jemmyw@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "firebase": "^3.4.1",
+    "inflection": "^1.10.0",
+    "ramda": "^0.22.1"
+  },
+  "devDependencies": {
+    "tape-async": "^2.1.1",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0"
+  }
+}
