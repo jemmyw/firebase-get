@@ -21,4 +21,4 @@ import { Spec, FulfilledSpec } from "./types";
  * @param stuff
  * @returns {Promise<FulfilledSpec>}
  */
-export declare function get(stuff: Spec): Promise<FulfilledSpec>;
+export default function Get(app?: any): (stuff: Spec) => Promise<FulfilledSpec>;

@@ -20,6 +20,8 @@ type Pair<T> = [string, T]
 const pair:<T>(object:PairObject<T>) => Pair<T> =
   compose<PairObject<any>, Array<Array<any>>, Pair<any>>(head, toPairs);
 
+let _app = firebase;
+
 function getDependsOn(value) {
   const t = type(value);
 
@@ -115,7 +117,7 @@ function createPromise(spec):Promise<FirebaseRecord | FirebaseRecord[]> {
   const value = spec.value;
   if (not(value)) { return Promise.resolve(null); }
 
-  const ref:Reference = firebase.database().ref()
+  const ref:Reference = _app.database().ref()
     .child(spec.model);
 
   if (typeof value === 'string') {
@@ -214,15 +216,18 @@ const noDependencies = compose<InternalSpecs, InternalSpec[], InternalSpec[]>(
  * @param stuff
  * @returns {Promise<FulfilledSpec>}
  */
-export function get(stuff:Spec):Promise<FulfilledSpec> {
-  const specs:InternalSpecs = constructInternalSpecs(stuff);
+export default function Get(app?:any) {
+  if (app) { _app = app; }
 
-  noDependencies(specs).forEach(spec => {
-    spec.promise = createPromise(spec);
-    createDependentPromises(spec, specs);
-  });
+  return function get(stuff: Spec): Promise<FulfilledSpec> {
+    const specs: InternalSpecs = constructInternalSpecs(stuff);
 
-  const promise = Bluebird.props(createPromises(specs));
-  return Promise.resolve(promise) as Promise<FulfilledSpec>;
+    noDependencies(specs).forEach(spec => {
+      spec.promise = createPromise(spec);
+      createDependentPromises(spec, specs);
+    });
+
+    const promise = Bluebird.props(createPromises(specs));
+    return Promise.resolve(promise) as Promise<FulfilledSpec>;
+  }
 }
-

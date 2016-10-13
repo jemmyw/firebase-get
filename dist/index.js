@@ -17,6 +17,7 @@ const test_1 = require('./test');
  * @type {(x0:PairObject<any>)=>Array<Array<any>>}
  */
 const pair = ramda_1.compose(ramda_1.head, ramda_1.toPairs);
+let _app = firebase;
 function getDependsOn(value) {
     const t = ramda_1.type(value);
     if (t === 'Object') {
@@ -108,7 +109,7 @@ function createPromise(spec) {
     if (ramda_1.not(value)) {
         return Promise.resolve(null);
     }
-    const ref = firebase.database().ref()
+    const ref = _app.database().ref()
         .child(spec.model);
     if (typeof value === 'string') {
         return createPromiseFromString(ref, value);
@@ -171,14 +172,20 @@ const noDependencies = ramda_1.compose(ramda_1.filter(ramda_1.complement(ramda_1
  * @param stuff
  * @returns {Promise<FulfilledSpec>}
  */
-function get(stuff) {
-    const specs = constructInternalSpecs(stuff);
-    noDependencies(specs).forEach(spec => {
-        spec.promise = createPromise(spec);
-        createDependentPromises(spec, specs);
-    });
-    const promise = Bluebird.props(createPromises(specs));
-    return Promise.resolve(promise);
+function Get(app) {
+    if (app) {
+        _app = app;
+    }
+    return function get(stuff) {
+        const specs = constructInternalSpecs(stuff);
+        noDependencies(specs).forEach(spec => {
+            spec.promise = createPromise(spec);
+            createDependentPromises(spec, specs);
+        });
+        const promise = Bluebird.props(createPromises(specs));
+        return Promise.resolve(promise);
+    };
 }
-exports.get = get;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Get;
 //# sourceMappingURL=index.js.map
